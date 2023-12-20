@@ -1,11 +1,11 @@
 import './App.css'
-
+import RegisterProducto from './components/RegisterProducts'
 function App() {
   
 
   return (
     <>
-        <h1>hola linda</h1>
+        <RegisterProducto/>
     </>
   )
 }
