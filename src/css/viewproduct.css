@@ -1,0 +1,7 @@
+.listado{
+    display: flex;
+    justify-content: center;
+}
+.list-group-item{
+    margin-right: 10px;
+}

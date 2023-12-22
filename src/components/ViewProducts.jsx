@@ -1,5 +1,7 @@
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import axios from "axios";
+import { ListGroup } from "react-bootstrap";
+import "../css/viewproduct.css"
 
 function ViewProduct() {
   const url = "http://localhost:4555/api/productos";
@@ -24,9 +26,14 @@ function ViewProduct() {
 
   const content = list.map((card) => (
     <div className="container" key={card.producto_id}>
-      <h3>{card.producto_name}</h3>
-      <h2>{card.producto_origen}</h2>
-      <h1>{card.producto_categoria}</h1>
+      <div className="listado">
+        {/* Utiliza la clase 'd-flex' para mostrar la lista horizontalmente */}
+        <ListGroup horizontal className="listado">
+          <ListGroup.Item>{card.producto_name}</ListGroup.Item>
+          <ListGroup.Item>{card.producto_categoria}</ListGroup.Item>
+          <ListGroup.Item>{card.producto_origen}</ListGroup.Item>
+        </ListGroup>
+      </div>
     </div>
   ));
 
@@ -34,3 +41,4 @@ function ViewProduct() {
 }
 
 export default ViewProduct;
+  [+]
