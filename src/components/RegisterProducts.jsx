@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import  { useState } from "react";
 import axios from "axios";
 
 function RegisterProducto() {
@@ -8,7 +8,7 @@ function RegisterProducto() {
     producto_origen: "",
     producto_stock: "",
     producto_categoria:"", // Corrected the typo in the state variable name
-    producto_vencimiento:""
+    producto_price:""
   });
 
   const handleChange = (e) => {
@@ -92,15 +92,15 @@ function RegisterProducto() {
           />
         </div>
         <div className="form-group">
-          <label className="label">Producto vencimiento:</label>
+          <label className="label">Producto precio:</label>
           <input
             className="input"
-            placeholder="Insert producto categoria"
-            type="date"
-            name="producto_vencimiento"
-            value={NewProducto.producto_vencimiento}
+            placeholder="Insert producto precio"
+            type="number"
+            name="producto_price"
+            value={NewProducto.producto_price}
             onChange={handleChange}
-            id="producto_vencimiento"
+            id="producto_price"
           />
         </div>
         <button type="submit">Submit</button>

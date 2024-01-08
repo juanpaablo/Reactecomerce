@@ -32,6 +32,7 @@ function ViewProduct() {
           <ListGroup.Item>{card.producto_name}</ListGroup.Item>
           <ListGroup.Item>{card.producto_categoria}</ListGroup.Item>
           <ListGroup.Item>{card.producto_origen}</ListGroup.Item>
+          <ListGroup.Item>{card.producto_price}</ListGroup.Item>
         </ListGroup>
       </div>
     </div>
@@ -41,4 +42,3 @@ function ViewProduct() {
 }
 
 export default ViewProduct;
-  [+]
