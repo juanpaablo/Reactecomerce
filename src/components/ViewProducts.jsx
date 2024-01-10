@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import axios from "axios";
-import { ListGroup, Button } from "react-bootstrap";
+import { ListGroup } from "react-bootstrap";
 import { ListGroupItem } from "react-bootstrap"; // Corrige la importación
 import "../css/viewproduct.css";
 
