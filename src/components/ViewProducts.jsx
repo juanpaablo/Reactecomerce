@@ -35,6 +35,7 @@ function ViewProduct() {
           <ListGroup.Item>{card.producto_categoria}</ListGroup.Item>
           <ListGroup.Item>{card.producto_origen}</ListGroup.Item>
           <ListGroup.Item>{card.producto_price}</ListGroup.Item>
+          <ListGroup.Item>{card.producto_stock}</ListGroup.Item>
           <ListGroupItem>
             <button
               className="simple"
