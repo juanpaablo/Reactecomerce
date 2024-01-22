@@ -33,10 +33,6 @@ function SellProduct() {
     setProduct(selectedProduct);
   };
 
-  const handleChange = (e) => {
-    setProduct({ ...product, [e.target.id]: e.target.value });
-  };
-
   const handleSell = async (e) => {
     e.preventDefault();
 
@@ -45,41 +41,26 @@ function SellProduct() {
     if (sellQuantityValue > 0 && sellQuantityValue <= product.producto_stock) {
       const updatedStock = product.producto_stock - sellQuantityValue;
 
-      setProduct({
-        ...product,
-        producto_stock: updatedStock,
-      });
+      try {
+        // Realizar una solicitud PUT para actualizar el stock en la base de datos
+        const res = await axios.put(url + '/' + product.producto_id, {
+          ...product,
+          producto_stock: updatedStock,
+        });
 
-      await handleEdit();
-
-      alert(`La venta de ${product.producto_name} se realizó correctamente`);
+        if (res.status === 200) {
+          alert(`La venta de ${product.producto_name} se realizó correctamente`);
+          // Actualizar la lista después de la venta
+          fetchData();
+        } else {
+          alert("Error al actualizar el stock en la base de datos");
+        }
+      } catch (error) {
+        console.error("Error al actualizar el stock en la base de datos", error);
+        alert("Error al actualizar el stock en la base de datos");
+      }
     } else {
       alert("La cantidad supera el stock");
-    }
-  };
-
-  const handleEdit = async () => {
-    try {
-      const updatedProduct = {
-        ...product,
-      };
-
-      console.log("Datos enviados al servidor:", updatedProduct);
-
-      const res = await axios.put(url + '/' + product.producto_id, updatedProduct);
-
-      console.log("Respuesta del servidor:", res);
-
-      if (res.status === 200) {
-        alert('Producto editado');
-        fetchData(); // Actualizar la lista solo si la edición es exitosa
-      } else if (res.status === 404) {
-        alert("Para poder editar, necesita seleccionar un producto");
-        console.log(updatedProduct);
-      }
-    } catch (error) {
-      console.error("Error editing product", error);
-      alert("Error al editar el producto");
     }
   };
 
@@ -99,7 +80,7 @@ function SellProduct() {
           type='text'
           name='producto_name'
           id='producto_name'
-          onChange={handleChange}
+          readOnly
         ></input>
         <br></br>
         <label>Categoría: </label>
@@ -108,7 +89,7 @@ function SellProduct() {
           type='text'
           name='producto_categoria'
           id='producto_categoria'
-          onChange={handleChange}
+          readOnly
         ></input>
         <br></br>
         <label>Origen: </label>
@@ -117,7 +98,7 @@ function SellProduct() {
           type='text'
           name='producto_origen'
           id='producto_origen'
-          onChange={handleChange}
+          readOnly
         ></input>
         <br></br>
         <label>Stock: </label>
@@ -126,17 +107,17 @@ function SellProduct() {
           type='text'
           name='producto_stock'
           id='producto_stock'
-          onChange={handleChange}
+          readOnly
         ></input>
         <br></br>
         <br></br>
-        <button type='button' onClick={handleEdit}>EDITAR</button>
         <input
           value={sellquantity}
           onChange={(e) => setSellQuantity(e.target.value)}
           type='text'
           name='producto_sell'
           id='producto_sell'
+          placeholder='Cantidad a vender'
         ></input>
         <button type="submit">Vender</button>
       </form>
@@ -145,6 +126,8 @@ function SellProduct() {
 }
 
 export default SellProduct;
+
+
 
 
 
